@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D2C05522051D367005EB48A /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2C05512051D367005EB48A /* Location.swift */; };
 		6D7A14AB20518D5C004E0098 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A14AA20518D5C004E0098 /* AppDelegate.swift */; };
 		6D7A14AD20518D5C004E0098 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A14AC20518D5C004E0098 /* ViewController.swift */; };
 		6D7A14B020518D5C004E0098 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D7A14AE20518D5C004E0098 /* Main.storyboard */; };
 		6D7A14B220518D5C004E0098 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D7A14B120518D5C004E0098 /* Assets.xcassets */; };
 		6D7A14B520518D5C004E0098 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D7A14B320518D5C004E0098 /* LaunchScreen.storyboard */; };
 		6D7A14C020518D5C004E0098 /* SudokuTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A14BF20518D5C004E0098 /* SudokuTests.swift */; };
+		6D7A14CB20518F59004E0098 /* SudokuGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A14CA20518F59004E0098 /* SudokuGame.swift */; };
+		6D7A14CF205195DB004E0098 /* SudokuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D7A14CE205195DB004E0098 /* SudokuCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D2C05512051D367005EB48A /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		6D7A14A720518D5C004E0098 /* Sudoku.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sudoku.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D7A14AA20518D5C004E0098 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6D7A14AC20518D5C004E0098 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -36,6 +40,8 @@
 		6D7A14BB20518D5C004E0098 /* SudokuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SudokuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D7A14BF20518D5C004E0098 /* SudokuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuTests.swift; sourceTree = "<group>"; };
 		6D7A14C120518D5C004E0098 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D7A14CA20518F59004E0098 /* SudokuGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuGame.swift; sourceTree = "<group>"; };
+		6D7A14CE205195DB004E0098 /* SudokuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SudokuCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +86,12 @@
 				6D7A14AA20518D5C004E0098 /* AppDelegate.swift */,
 				6D7A14AC20518D5C004E0098 /* ViewController.swift */,
 				6D7A14AE20518D5C004E0098 /* Main.storyboard */,
+				6D7A14CE205195DB004E0098 /* SudokuCell.swift */,
 				6D7A14B120518D5C004E0098 /* Assets.xcassets */,
 				6D7A14B320518D5C004E0098 /* LaunchScreen.storyboard */,
 				6D7A14B620518D5C004E0098 /* Info.plist */,
+				6D7A14CA20518F59004E0098 /* SudokuGame.swift */,
+				6D2C05512051D367005EB48A /* Location.swift */,
 			);
 			path = Sudoku;
 			sourceTree = "<group>";
@@ -199,7 +208,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D7A14CB20518F59004E0098 /* SudokuGame.swift in Sources */,
 				6D7A14AD20518D5C004E0098 /* ViewController.swift in Sources */,
+				6D2C05522051D367005EB48A /* Location.swift in Sources */,
+				6D7A14CF205195DB004E0098 /* SudokuCell.swift in Sources */,
 				6D7A14AB20518D5C004E0098 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,6 +366,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 96V2QW343B;
 				INFOPLIST_FILE = Sudoku/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tyler.Sudoku;
@@ -368,6 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 96V2QW343B;
 				INFOPLIST_FILE = Sudoku/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tyler.Sudoku;
