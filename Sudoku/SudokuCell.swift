@@ -18,7 +18,10 @@ class SudokuCell: UICollectionViewCell
         {
             return
         }
+        let indexPath = (self.superview as! UICollectionView).indexPath(for: self)!
+        let currentTitle = selectedButton.currentTitle!
+        data[indexPath.section][indexPath.row] = currentTitle == "X" ? 0 : Int(currentTitle)!
         sender.backgroundColor = selectedButton.backgroundColor
-        sender.setTitle(selectedButton.currentTitle!, for: .normal)
+        sender.setTitle(currentTitle, for: .normal)
     }
 }
