@@ -10,6 +10,7 @@ import UIKit
 
 var selectedButton: UIButton?
 var data = [[Int]](repeating: [Int](repeating: 0, count: 9), count: 9)
+var globalMatrix: SudokuMatrix?
 
 class ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout
 {
@@ -71,8 +72,51 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         selectedButton = sender
     }
     
+    /*
+     AlgorithmX():
+     If Matrix has no Columns
+     Terminate with the current solution
+     Assign C to the first column in Matrix
+     For each Row R in where Matrix[R][C] = 1
+     AddRowToSolution(R) and CoverRow(R)
+     Recursively call AlgorithmX() on the modified Matrix
+     RemoveRowFromSolution(R) and UncoverRow(R)
+     CoverRow(R):
+     For each Column C where Matrix[R][C] = 1
+     For each Row L where Matrix[L][C] = 1
+     For each Node N in L
+     Cover(N)
+     Remove C from Matrix
+     UncoverRow(R):
+     For each Column C where Matrix[R][C] = 1
+     For each Row L where Matrix[L][C] = 1
+     For each Node N in L
+     Uncover(N)
+     Un-remove C from Matrix
+     Cover(node):
+     Assign node.left.right to node.right
+     Assign node.right.left to node.left
+     Uncover(node):
+     Assign node.left.right to node
+     Assign node.right.left to node
+    */
+    
     @IBAction func solveButtonPressed(_ sender: Any)
     {
         //Actually run Algorithm X
+        var matrix: SudokuMatrix!
+        if globalMatrix == nil
+        {
+            matrix = SudokuMatrix(81)
+            globalMatrix = matrix
+        }
+        else
+        {
+            matrix = globalMatrix!
+        }
+        print("Started constraint generation")
+        let constraints: [[Int]] = matrix.generateConstraints()
+        print(constraints.count) //Literally to shut up the compiler.
+        print("Finished constraint generation")
     }
 }
