@@ -59,6 +59,39 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         allowedBitFields[8] = 1 << 7
         allowedBitFields[9] = 1 << 8
         allAllowed = arraySum(allowedBitFields)
+        //8........
+        //..36.....
+        //.7..9.2..
+        //.5...7...
+        //....457..
+        //...1...3.
+        //..1....68
+        //..85...1.
+        //.9....4..
+        
+        let board = [
+            [8,0,0,0,0,0,0,0,0],
+            [0,0,3,6,0,0,0,0,0],
+            [0,7,0,0,9,0,2,0,0],
+            [0,5,0,0,0,7,0,0,0],
+            [0,0,0,0,4,5,7,0,0],
+            [0,0,0,1,0,0,0,3,0],
+            [0,0,1,0,0,0,0,6,8],
+            [0,0,8,5,0,0,0,1,0],
+            [0,9,0,0,0,0,4,0,0]
+        ]
+        /*let board = [
+         [1,0,0,0,0,7,0,9,0],
+         [0,3,0,0,2,0,0,0,8],
+         [0,0,9,6,0,0,5,0,0],
+         [0,0,5,3,0,0,9,0,0],
+         [0,1,0,0,8,0,0,0,2],
+         [6,0,0,0,0,4,0,0,0],
+         [3,0,0,0,0,0,0,1,0],
+         [0,4,1,0,0,0,0,0,7],
+         [0,0,7,0,0,0,3,0,0]
+         ]*/
+        data = board
     }
     
     @IBOutlet weak var stackView: UIStackView!
@@ -103,16 +136,26 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     @IBAction func solveButtonPressed(_ sender: UIButton)
     {
+        resultLabel.text = ""
         if sender.titleLabel!.text == "Solve!"
         {
-            let placedNumbers: Int = solveBoard(&data)
-            collectionView.reloadData()
-            sender.setTitle("Reset", for: .normal)
-            resultLabel.text = placedNumbers == 81 ? "Solution found!" : "No solution."
+            if(isBoardValid())
+            {
+                let before = NSCalendar.current.dateComponents([.nanosecond], from: Date()).nanosecond
+                let placedNumbers: Int = solveBoard(&data)
+                let after = NSCalendar.current.dateComponents([.nanosecond], from: Date()).nanosecond
+                print("Took \(Double(after! - before!) / 1000000)ms to complete.")
+                collectionView.reloadData()
+                sender.setTitle("Reset", for: .normal)
+                resultLabel.text = placedNumbers == 81 ? "Solution found!" : "No solution."
+            }
+            else
+            {
+                resultLabel.text = "Invalid board!"
+            }
         }
         else
         {
-            resultLabel.text = ""
             sender.setTitle("Solve!", for: .normal)
             data = [[Int]](repeating: [Int](repeating: 0, count: 9), count: 9)
             collectionView.reloadData()
@@ -603,5 +646,69 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         let copy: [[Int]] = matrix
         return copy
     }
-
+    
+    func isBoardValid() -> Bool
+    {
+        for r in 0..<9
+        {
+            var unusedValues = [Int](repeating: 0, count: 9)
+            for i in 0..<9
+            {
+                let num = data[r][i]
+                if num != 0
+                {
+                    if unusedValues[num - 1] != 0
+                    {
+                        return false
+                    }
+                    else
+                    {
+                        unusedValues[num - 1] = num
+                    }
+                }
+            }
+        }
+        for c in 0..<9
+        {
+            var unusedValues = [Int](repeating: 0, count: 9)
+            for i in 0..<9
+            {
+                let num = data[i][c]
+                if num != 0
+                {
+                    if unusedValues[num - 1] != 0
+                    {
+                        return false
+                    }
+                    else
+                    {
+                        unusedValues[num - 1] = num
+                    }
+                }
+            }
+        }
+        for group in 0..<9
+        {
+            var unusedValues = [Int](repeating: 0, count: 9)
+            for r in 0..<3
+            {
+                for c in 0..<3
+                {
+                    let num = data[r + group % 3 * 3][c + group / 3 * 3]
+                    if num != 0
+                    {
+                        if unusedValues[num - 1] != 0
+                        {
+                            return false
+                        }
+                        else
+                        {
+                            unusedValues[num - 1] = num
+                        }
+                    }
+                }
+            }
+        }
+        return true
+    }
 }
