@@ -59,16 +59,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         allowedBitFields[8] = 1 << 7
         allowedBitFields[9] = 1 << 8
         allAllowed = arraySum(allowedBitFields)
-        //8........
-        //..36.....
-        //.7..9.2..
-        //.5...7...
-        //....457..
-        //...1...3.
-        //..1....68
-        //..85...1.
-        //.9....4..
         
+        /*
+        Debug:
         let board = [
             [8,0,0,0,0,0,0,0,0],
             [0,0,3,6,0,0,0,0,0],
@@ -91,7 +84,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
          [0,4,1,0,0,0,0,0,7],
          [0,0,7,0,0,0,3,0,0]
          ]*/
-        data = board
+        data = board*/
     }
     
     @IBOutlet weak var stackView: UIStackView!
